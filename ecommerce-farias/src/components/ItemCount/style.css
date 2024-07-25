@@ -1,0 +1,22 @@
+.itemCount {
+    background-color:  #4563BF;
+    border-radius: 6px;
+    padding: 0 6px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 15pt;
+}
+
+.itemCount button {
+    background-color:  #4563BF;
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 15pt;
+}
+
+.itemCount button:disabled {
+    color: #4563BF;;
+}

@@ -1,11 +1,11 @@
 import './style.css'
 
-function CartWidget() {
+function CartWidget({ contador }) {
     return (
-        <div className="CartWidget">
+        <div className='CartWidget'>
             <a href='#'>
                 <img className="icone" src="/2135A6-bold_carrinho.png" alt="Ìcone carrinho" />
-                <h3>0</h3>
+                <h3>{contador}</h3>
             </a>
         </div>
     );

@@ -1,7 +1,7 @@
 import './style.css'
 import CartWidget from '../CartWidget';
 
-function NavBar() {
+function NavBar({ contador }) {
     return (
         <header className='navBar'>
             <nav>
@@ -13,12 +13,12 @@ function NavBar() {
                     <li><a>Novidades</a></li>
                     <li><a>Ofertas</a></li>
                 </ul>
-                <div className="auth-cart">
+                <div className='auth-cart'>
                     <ul>
                         <li><button>Login</button></li>
                         <li><button>Cadastro</button></li>
                     </ul>
-                    <CartWidget />
+                    <CartWidget contador={contador}/>
                 </div>
             </nav>
         </header>
