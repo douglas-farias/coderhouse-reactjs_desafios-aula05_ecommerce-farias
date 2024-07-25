@@ -1,0 +1,90 @@
+a {
+  color: #2135A6;
+  cursor: pointer;
+}
+
+button {
+  cursor: pointer;
+}
+
+body {
+  color: #2135A6;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  background-color: #FFFFFF;
+  margin: 0;
+  min-height: 100vh;
+}
+
+.navBar {
+  padding: 24px 60px;
+}
+
+header {
+  background-color: #F2F2F2;
+}
+
+.navBar nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.navBar nav div {
+  font-weight: bolder;
+  font-size: 20px;
+}
+
+.navBar nav ul {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.navBar nav ul li {
+  margin-left: 20px;
+}
+
+.navBar nav button {
+  background-color: #FFFFFF00;
+  cursor: pointer;
+  color: #2135A6;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 12pt;  
+}
+
+.navBar nav button:hover {
+  font-weight: bold;
+}
+
+.auth-cart {
+  display: flex;
+  align-items: center;
+}
+
+.auth-cart ul {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.auth-cart ul li {
+  margin-left: 10px;
+}
+
+.auth-cart button {
+  background-color: transparent;
+  border: none;
+  color: #2135A6;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 12pt;  
+}
+
+.auth-cart button:hover {
+  font-weight: bold;
+}

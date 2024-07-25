@@ -1,0 +1,22 @@
+.CartWidget {
+    display: flex;
+    align-items: center;
+}
+
+.CartWidget a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.CartWidget img.icone {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+}
+
+.CartWidget h3 {
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+    font-size: 12pt;
+}
