@@ -1,0 +1,59 @@
+.produtoContainer {
+    margin-top: 18px;
+    padding: 18px;
+    border-radius: 18px;
+    background-color: #F2F2F2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    row-gap: 12px;
+    grid-template-areas: 
+    "imagem imagem"
+    "nome preco"
+    "detalhes detalhes"
+    "contador contador";
+}
+
+.produtoContainer figure {
+    grid-area: imagem;
+}
+
+.produtoContainer h2 {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    grid-area: nome;
+    color: #4563BF;
+    font-size: 18pt;
+}
+
+.produtoContainer span {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    grid-area: preco;
+    color: #4563BF;
+    font-size: 15pt;
+}
+
+.produtoContainer button {
+    background-color:  #ADC0D9;
+    border-radius: 6px;
+    padding: 3px 6px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    grid-area: detalhes;
+    color: #FFFFFF;
+    font-size: 9pt;
+}
+
+.produtoContainer button:hover {
+    background-color:  #7999D9;
+    color: #FFFFFF;
+}
+
+.produtoContainer .itemCount {
+    grid-area: contador;
+}

@@ -1,21 +1,16 @@
-import './style.css'
-import ItemCount from '../ItemCount';
+import './style.css';
+import ItemList from '../ItemList';
 
-function ItemListContainer({ greeting, estoque, contador, adicionar, subtrair }) {
-    return(
-        <>
+function ItemListContainer({ greeting, itens, adicionar, subtrair }) {
+    return (
             <div className='itemListContainer'>
-                <h2>{ greeting }</h2>
+                <h4>{greeting}</h4>
+                <ItemList
+                    itens={itens}
+                    adicionar={adicionar}
+                    subtrair={subtrair}
+                />
             </div>
-            <div className='produtoContainer'>
-                <figure>
-                    <img src="/produto01-1.png" alt="Imagem do produto" />
-                </figure>
-                <h2>PRODUTO</h2>
-                <span>R$ 9,90</span>
-                <ItemCount estoque={estoque} contador={contador} adicionar={adicionar} subtrair={subtrair} />
-            </div>
-        </>
     );
 }
 
