@@ -1,7 +1,24 @@
-import './style.css';
+import './style.css'
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import ItemCount from '../ItemCount';
 
-function Item({ item, selecionarItem, adicionar, subtrair }) {
+function Item({ item }) {
+    
+    const [contador, setContador] = useState(0);
+
+    const adicionar = () => {
+        if (contador < item.estoque) {
+            setContador(contador + 1);
+        }
+    };
+
+    const subtrair = () => {
+        if (contador > 0) {
+            setContador(contador - 1);
+        }
+    };
+
     return (
         <div className='produtoContainer'>
             <figure>
@@ -9,15 +26,17 @@ function Item({ item, selecionarItem, adicionar, subtrair }) {
             </figure>
             <h2>{item.nome.toUpperCase()}</h2>
             <span>R$ {item.preco.toFixed(2).replace('.', ',')}</span>
-            <button className='btnDetalhes' onClick={() => selecionarItem(item)}>Detalhes do produto</button>
+            <Link to={`/produto/${item.id}`}>
+                <button className='btnDetalhes'>Detalhes do produto</button>
+            </Link>
             <ItemCount
-                contador={item.contador}
-                adicionar={() => adicionar(item.id)}
-                subtrair={() => subtrair(item.id)}
+                contador={contador}
+                adicionar={adicionar}
+                subtrair={subtrair}
                 estoque={item.estoque}
             />
         </div>
     );
 }
 
-export default Item;
+export default Item

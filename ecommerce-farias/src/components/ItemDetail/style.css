@@ -6,14 +6,15 @@
     grid-template-areas: 
     "titulo titulo titulo"
     "imagem detalhes descricao"
-    "imagem detalhes botaoCarrinho";
+    "imagem contador botaoCarrinho";
 }
 
 .item__titulo {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 0px 60px 24px 60px;
+    align-items: center;
+    padding: 24px 60px 24px 60px;
     background-color: none;
     display: flex;
     flex-direction: row;
@@ -60,12 +61,46 @@
     padding-left: 24px;
 }
 
+.itemCountContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color:  #4563BF;
+    padding: 0 12px;
+    grid-area: contador;
+    color: #FFFFFF;
+    font-weight: 600;
+}
+
+.itemCountContainer button {
+    background-color:  #4563BF;
+    padding: 0 12px;
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 15pt;
+}
+
+.itemCountContainer button:hover {
+    color: #2135A6;
+}
+
+.itemCountContainer button:disabled {
+    color: #4563BF;
+}
+
+.itemCountContainer span {
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 21pt;
+}
+
 .item__descricaoContainer {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     background-color: #7999D9;
-    padding: 36px 60px 12px 24px;
+    padding: 36px 60px 48px 24px;
     grid-area: descricao;
     text-align: justify;
 }
@@ -78,7 +113,7 @@
 }
 
 .item__descricaoContainer h2 {
-    font-size: 18pt;
+    font-size: 21pt;
 }
 
 .botaoCarrinho {
@@ -97,6 +132,6 @@
     align-items: center;
     justify-content: space-evenly;
     color: #FFFFFF;
-    font-weight: 400;
+    font-weight: 600;
     font-size: 15pt;
 }

@@ -1,8 +1,10 @@
 import './style.css';
-import ItemList from '../ItemList';
+import ItemList from '../../components/ItemList';
 import { useState, useEffect } from 'react';
 
-function ItemListContainer({ itens, setItens, selecionarItem, adicionar, subtrair }) {
+function ItemListContainer({ adicionar, subtrair }) {
+
+  const [itens, setItens] = useState([]);
   const [carregamento, setCarregamento] = useState(true);
 
   useEffect(() => {
@@ -16,9 +18,8 @@ function ItemListContainer({ itens, setItens, selecionarItem, adicionar, subtrai
               subcategoria: 'Categoria A1',
               nome: 'Produto 01',
               descricao: 'Maecenas ipsum velit, consectetuer eu, lobortis ut, dictum at, dui. In rutrum. Sed ac dolor sit amet purus malesuada congue. In laoreet, magna id viverra tincidunt, sem odio bibendum justo, vel imperdiet sapien wisi sed libero. Suspendisse sagittis ultrices augue. Mauris metus.',
-              detalhe1: 'XXX',
-              detalhe2: 'YYY',
-              detalhe3: 'ZZZ',
+              detalhe1: 'Detalhe X',
+              detalhe2: 'Detalhe Y',
               preco: 9.90,
               imagem: '/produto01-1.png',
               imagemAlt: 'Descrição da imagem 1',
@@ -91,21 +92,18 @@ function ItemListContainer({ itens, setItens, selecionarItem, adicionar, subtrai
       setItens(produtos);
       setCarregamento(false);
     });
-  }, [setItens]);
+  }, []);
 
   return (
     <div className='itemListContainer'>
       {carregamento ? (
         <div className='carregamento'>
-          <figure className='logoCentral'>
-            <img src='/transparente_logo.png' alt='Logo Ecommerce' />
-          </figure>
+          <img src='/transparente_logo.png' alt='Logo Ecommerce' />
           <h2>Carregando a lista de produtos...</h2>
         </div>
       ) : (
         <ItemList
           itens={itens}
-          selecionarItem={selecionarItem}
           adicionar={adicionar}
           subtrair={subtrair}
         />

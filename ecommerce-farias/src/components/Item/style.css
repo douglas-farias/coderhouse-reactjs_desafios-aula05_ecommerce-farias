@@ -36,14 +36,18 @@
     font-size: 15pt;
 }
 
-.produtoContainer button {
-    background-color:  #ADC0D9;
-    border-radius: 6px;
-    padding: 3px 6px;
+.produtoContainer a {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
+    grid-area: detalhes;
+}
+
+.produtoContainer a button {
+    width: 100%;
+    background-color:  #ADC0D9;
+    border-radius: 6px;
+    padding: 3px 6px;
     grid-area: detalhes;
     color: #FFFFFF;
     font-size: 9pt;
@@ -54,6 +58,32 @@
     color: #FFFFFF;
 }
 
-.produtoContainer .itemCount {
+.produtoContainer .itemCountContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color:  #4563BF;
+    border-radius: 6px;
+    padding: 0 6px;
     grid-area: contador;
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 15pt;
+}
+
+.produtoContainer .itemCountContainer button {
+    background-color:  #4563BF;
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 15pt;
+}
+
+.produtoContainer .itemCountContainer button:disabled {
+    color: #4563BF;
+}
+
+.produtoContainer .itemCountContainer span {
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 15pt;
 }

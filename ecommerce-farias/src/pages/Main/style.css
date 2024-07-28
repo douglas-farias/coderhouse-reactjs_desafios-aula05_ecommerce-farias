@@ -1,0 +1,17 @@
+.conteudo{
+    padding: 24px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.conteudo a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.conteudo h1 {
+    max-width: 300px;
+    text-align: center;
+}

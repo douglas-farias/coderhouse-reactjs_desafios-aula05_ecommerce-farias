@@ -1,0 +1,9 @@
+.itemListContainer{
+    padding: 24px 60px;
+}
+
+.carregamento {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

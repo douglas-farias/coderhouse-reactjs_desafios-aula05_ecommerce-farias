@@ -1,12 +1,15 @@
 import './style.css'
+import { Link } from 'react-router-dom';
 import CartWidget from '../CartWidget';
 
+
 function NavBar({ contador }) {
+    
     return (
         <header className='navBar'>
             <nav>
                 <div>
-                    <a href="../../../public/index.html">E_COMMERCE</a>
+                    <Link to={'/'}><a href="">E_COMMERCE</a></Link>
                 </div>
                 <ul>
                     <li><a>Produtos</a></li>

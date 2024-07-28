@@ -1,7 +1,7 @@
 import './style.css';
 import Item from '../Item';
 
-function ItemList({ itens, selecionarItem, adicionar, subtrair }) {
+function ItemList({ itens, adicionar, subtrair }) {
 
     return (
         <div>
@@ -11,7 +11,6 @@ function ItemList({ itens, selecionarItem, adicionar, subtrair }) {
                     <Item
                         key={item.id}
                         item={item}
-                        selecionarItem={selecionarItem}
                         adicionar={adicionar}
                         subtrair={subtrair}
                     />
