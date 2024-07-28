@@ -1,0 +1,102 @@
+.itemDetail {
+    height: 80vh;
+    display: grid;
+    grid-template-columns: 6fr 2fr 4fr;
+    grid-template-rows: 1fr 10fr 72px;
+    grid-template-areas: 
+    "titulo titulo titulo"
+    "imagem detalhes descricao"
+    "imagem detalhes botaoCarrinho";
+}
+
+.item__titulo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0px 60px 24px 60px;
+    background-color: none;
+    display: flex;
+    flex-direction: row;
+    grid-area: titulo;
+}
+
+.item__titulo button {
+    background-color: #FFFFFF00;
+    color: #2135A6;
+}
+
+.item__titulo button h5 {
+    font-weight: 300;
+    font-size: 12pt;
+}
+
+.item__imagemContainer {
+    background-color: #F2F2F2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-area: imagem;
+}
+
+.item__detalhesContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 36px 12px 108px 36px;
+    background-color: #4563BF;
+    grid-area: detalhes;
+    color: #FFFFFF;
+    text-align: left;
+}
+
+.item__detalhesContainer h3 {
+    font-weight: lighter;
+    font-size: 12pt;
+    padding-bottom: 12px;
+}
+
+.item__detalhesContainer h4 {
+    font-size: 18pt;
+    padding-left: 24px;
+}
+
+.item__descricaoContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #7999D9;
+    padding: 36px 60px 12px 24px;
+    grid-area: descricao;
+    text-align: justify;
+}
+
+.item__descricaoContainer h4 {
+    color: #FFFFFF;
+    text-align: end;
+    font-weight: lighter;
+    font-size: 12pt;
+}
+
+.item__descricaoContainer h2 {
+    font-size: 18pt;
+}
+
+.botaoCarrinho {
+    width: 100%;
+    background-color: #2135A6;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    grid-area: botaoCarrinho;
+}
+
+.botaoCarrinho button {
+    width: 100%;
+    background-color: #2135A6;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    color: #FFFFFF;
+    font-weight: 400;
+    font-size: 15pt;
+}

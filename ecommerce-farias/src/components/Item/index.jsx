@@ -1,7 +1,7 @@
 import './style.css';
 import ItemCount from '../ItemCount';
 
-function Item({ item, adicionar, subtrair }) {
+function Item({ item, selecionarItem, adicionar, subtrair }) {
     return (
         <div className='produtoContainer'>
             <figure>
@@ -9,7 +9,7 @@ function Item({ item, adicionar, subtrair }) {
             </figure>
             <h2>{item.nome.toUpperCase()}</h2>
             <span>R$ {item.preco.toFixed(2).replace('.', ',')}</span>
-            <button className='btnDetalhes'>Detalhes do produto</button>
+            <button className='btnDetalhes' onClick={() => selecionarItem(item)}>Detalhes do produto</button>
             <ItemCount
                 contador={item.contador}
                 adicionar={() => adicionar(item.id)}
