@@ -10,8 +10,7 @@
     grid-template-areas: 
     "imagem imagem"
     "nome preco"
-    "detalhes detalhes"
-    "contador contador";
+    "detalhes detalhes";
 }
 
 .produtoContainer figure {
@@ -45,45 +44,16 @@
 
 .produtoContainer a button {
     width: 100%;
-    background-color:  #ADC0D9;
+    background-color:  #4563BF;
     border-radius: 6px;
-    padding: 3px 6px;
+    margin-top: 6px;
+    padding: 12px 6px;
     grid-area: detalhes;
     color: #FFFFFF;
-    font-size: 9pt;
+    font-size: 12pt;
 }
 
 .produtoContainer button:hover {
     background-color:  #7999D9;
     color: #FFFFFF;
-}
-
-.produtoContainer .itemCountContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    background-color:  #4563BF;
-    border-radius: 6px;
-    padding: 0 6px;
-    grid-area: contador;
-    color: #FFFFFF;
-    font-weight: 600;
-    font-size: 15pt;
-}
-
-.produtoContainer .itemCountContainer button {
-    background-color:  #4563BF;
-    color: #FFFFFF;
-    font-weight: 600;
-    font-size: 15pt;
-}
-
-.produtoContainer .itemCountContainer button:disabled {
-    color: #4563BF;
-}
-
-.produtoContainer .itemCountContainer span {
-    color: #FFFFFF;
-    font-weight: 600;
-    font-size: 15pt;
 }
