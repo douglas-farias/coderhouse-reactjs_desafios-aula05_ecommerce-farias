@@ -2,7 +2,7 @@ import './style.css';
 import ItemList from '../../components/ItemList';
 import { useState, useEffect } from 'react';
 
-function ItemListContainer({ adicionar, subtrair }) {
+function ItemListContainer() {
 
   const [itens, setItens] = useState([]);
   const [carregamento, setCarregamento] = useState(true);
@@ -27,7 +27,7 @@ function ItemListContainer({ adicionar, subtrair }) {
               oferta: false,
               precoOferta: 0.00,
               estoque: 15,
-              contador: 0
+              quantidade: 0
             },
             {
               id: '0002',
@@ -45,7 +45,7 @@ function ItemListContainer({ adicionar, subtrair }) {
               oferta: false,
               precoOferta: 0.00,
               estoque: 20,
-              contador: 0
+              quantidade: 0
             },
             {
               id: '0003',
@@ -63,7 +63,7 @@ function ItemListContainer({ adicionar, subtrair }) {
               oferta: false,
               precoOferta: 0.00,
               estoque: 25,
-              contador: 0
+              quantidade: 0
             },
             {
               id: '0004',
@@ -81,7 +81,7 @@ function ItemListContainer({ adicionar, subtrair }) {
               oferta: false,
               precoOferta: 0.00,
               estoque: 30,
-              contador: 0
+              quantidade: 0
             }
           ]);
         }, 2000);
@@ -104,8 +104,6 @@ function ItemListContainer({ adicionar, subtrair }) {
       ) : (
         <ItemList
           itens={itens}
-          adicionar={adicionar}
-          subtrair={subtrair}
         />
       )}
     </div>

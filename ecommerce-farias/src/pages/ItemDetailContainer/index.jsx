@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ItemDetail from '../../components/ItemDetail';
 
-function ItemDetailContainer({ voltar, adicionar, subtrair }) {
+function ItemDetailContainer({ voltar }) {
   
     const { id } = useParams();
     const [itens, setItens] = useState([]);
@@ -31,7 +31,7 @@ function ItemDetailContainer({ voltar, adicionar, subtrair }) {
                             oferta: false,
                             precoOferta: 0.00,
                             estoque: 15,
-                            contador: 0
+                            quantidade: 0
                         },
                         {
                             id: '0002',
@@ -49,7 +49,7 @@ function ItemDetailContainer({ voltar, adicionar, subtrair }) {
                             oferta: false,
                             precoOferta: 0.00,
                             estoque: 20,
-                            contador: 0
+                            quantidade: 0
                         },
                         {
                             id: '0003',
@@ -67,7 +67,7 @@ function ItemDetailContainer({ voltar, adicionar, subtrair }) {
                             oferta: false,
                             precoOferta: 0.00,
                             estoque: 25,
-                            contador: 0
+                            quantidade: 0
                         },
                         {
                             id: '0004',
@@ -85,7 +85,7 @@ function ItemDetailContainer({ voltar, adicionar, subtrair }) {
                             oferta: false,
                             precoOferta: 0.00,
                             estoque: 30,
-                            contador: 0
+                            quantidade: 0
                         }
                     ]);
                 }, 2000);
@@ -114,8 +114,6 @@ function ItemDetailContainer({ voltar, adicionar, subtrair }) {
                     voltar={voltar}
                     key={item.id}
                     item={item}
-                    adicionar={adicionar}
-                    subtrair={subtrair}
                 />
             )}          
         </div>

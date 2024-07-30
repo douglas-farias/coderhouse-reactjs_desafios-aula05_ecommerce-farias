@@ -1,23 +1,16 @@
 import './style.css';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useCart } from '../../context/CartProvider';
 import ItemCount from '../ItemCount';
 
 function ItemDetail({ item }) {
+    const [contador, setContador] = useState(1);
+    const { cart, adicionarAoCarrinho } = useCart();
 
-    const [contador, setContador] = useState(0);
-
-    const adicionar = () => {
-        if (contador < item.estoque) {
-            setContador(contador + 1);
-        }
-    };
-
-    const subtrair = () => {
-        if (contador > 0) {
-            setContador(contador - 1);
-        }
-    };
+    const itemNoCarrinho = cart.find(cartItem => cartItem.id === item.id);
+    const quantidadeNoCarrinho = itemNoCarrinho ? itemNoCarrinho.quantidade : 0;
+    
 
     return (
         <div className='itemDetail'>
@@ -44,25 +37,24 @@ function ItemDetail({ item }) {
                 <div>
                     <h3>Detalhe Z</h3>
                     <h4>{item.detalhe3}</h4>
-                </div>  
+                </div>
             </div>
             <ItemCount
-                contador={contador}
-                adicionar={() => adicionar(item.id)}
-                subtrair={() => subtrair(item.id)}
                 estoque={item.estoque}
-            /> 
+                contadorInicial={1}
+                quantidadeNoCarrinho={quantidadeNoCarrinho}
+                atualizacaoContador={setContador}
+            />
             <div className='item__descricaoContainer'>
                 <h4>{item.categoria} &gt; {item.subcategoria}</h4>
                 <p>{item.descricao}</p>
                 <h2>R$ {item.preco.toFixed(2).replace('.', ',')}</h2>
             </div>
             <div className='botaoCarrinho'>
-                <button>Adicionar ao carrinho</button>
+                <button onClick={() => adicionarAoCarrinho({ ...item, quantidade: contador })}>Adicionar ao carrinho</button>
             </div>
         </div>
     );
-
 }
 
-export default ItemDetail
+export default ItemDetail;

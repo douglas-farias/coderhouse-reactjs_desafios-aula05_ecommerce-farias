@@ -9,7 +9,7 @@ function NavBar({ contador }) {
         <header className='navBar'>
             <nav>
                 <div>
-                    <Link to={'/'}><a href="">E_COMMERCE</a></Link>
+                    <Link to={'/'}>E_COMMERCE</Link>
                 </div>
                 <ul>
                     <li><a>Produtos</a></li>
