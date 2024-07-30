@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function ItemCount({ estoque, contadorInicial, quantidadeNoCarrinho, atualizacaoContador }) {
+function ItemCount({ estoque, contadorInicial, quantidadeNoCarrinho, atualizacaoContador, contexto }) {
     const [contador, setContador] = useState(contadorInicial);
 
     useEffect(() => {
@@ -12,8 +12,14 @@ function ItemCount({ estoque, contadorInicial, quantidadeNoCarrinho, atualizacao
     }, [contador, atualizacaoContador]);
 
     const adicionar = () => {
-        if (contador + quantidadeNoCarrinho < estoque) {
-            setContador(contador + 1);
+        if (contexto === 'carrinho') {
+            if (contador < estoque) {
+                setContador(contador + 1);
+            }
+        } else {
+            if (contador + quantidadeNoCarrinho < estoque) {
+                setContador(contador + 1);
+            }
         }
     };
 
@@ -27,9 +33,9 @@ function ItemCount({ estoque, contadorInicial, quantidadeNoCarrinho, atualizacao
         <div className='itemCountContainer'>
             <button onClick={subtrair} disabled={contador === 1}>-</button>
             <span>{contador}</span>
-            <button onClick={adicionar} disabled={contador + quantidadeNoCarrinho >= estoque}>+</button>
+            <button onClick={adicionar} disabled={(contexto === 'carrinho' ? contador >= estoque : contador + quantidadeNoCarrinho >= estoque)}>+</button>
         </div>
     );
 }
 
-export default ItemCount
+export default ItemCount;

@@ -8,8 +8,10 @@ function CartList() {
     
     if (cart.length === 0) {
         return (
-            <div className='emptyCart'>
-                <h2>ainda não há produtos no seu carrinho.</h2>
+            <div className='cartList'>
+                <div className='cartListVazio'>
+                    <h2>ainda não há produtos no seu carrinho.</h2>
+                </div>
             </div>
         );
     } else {

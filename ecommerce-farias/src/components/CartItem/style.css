@@ -1,0 +1,108 @@
+.cartItem {
+    display: grid;
+    background-color: #F2F2F2;
+    min-height: 120px;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 15px;
+    grid-template-areas:
+    "imagem nome preco quantidade subtotal"
+    "imagem categoria preco quantidade deletar";
+    color: #000000;
+}
+
+.cartItem__imagemContainer {
+    width: 90px;
+    height: 90px;
+    grid-area: imagem;
+}
+
+.cartItem__imagemContainer img {
+    width: 90px;
+    height: 90px;
+}
+
+.cartItem__nome {
+    font-family: "Roboto", sans-serif;
+    font-weight: 900;
+    font-style: bold;
+    font-size: 15pt;
+    grid-area: nome;
+    color: #000000;
+}
+
+.cartItem__categoria {
+    font-family: "Roboto", sans-serif;
+    font-weight: 100;
+    font-style: normal;
+    font-size: 12pt;
+    grid-area: categoria;
+    color: #000000;
+}
+
+.cartItem__preco {
+    font-weight: 100;
+    font-style: normal;
+    grid-area: preco;
+    color: #000000;
+}
+
+.cartItem__count .itemCountContainer {
+    background-color: #F2F2F2;
+    display: flex;
+    flex-direction: row;
+    align-items: top;
+    justify-content: space-evenly;
+    grid-area: quantidade;
+    font-family: "Roboto", sans-serif;
+    font-weight: 800;
+    font-style: bold;
+    font-size: 16px;
+    color: #000000;
+}
+
+.cartItem__count .itemCountContainer button {
+    background-color: #F2F2F2;
+    display: flex;
+    flex-direction: row;
+    align-items: top;
+    font-family: "Roboto", sans-serif;
+    font-weight: 800;
+    font-style: bold;
+    font-size: 16px;
+    color: #000000;
+}
+
+.cartItem__count .itemCountContainer button:disabled {
+    color: #F2F2F2;
+}
+
+.cartItem__count .itemCountContainer span {
+    font-weight: 100;
+    font-style: normal;
+    font-size: 16px;
+    color: #000000;
+}
+
+.cartItem__subtotal {
+    display: flex;
+    justify-content: right;
+    font-weight: 900;
+    font-size: 15pt;
+    grid-area: subtotal;
+    color: #000000;
+}
+
+.cartItem__deletar {
+    background-color: #F2F2F2;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    grid-area: deletar;
+    color: #000000;
+}
+
+.cartItem__deletar img {
+    height: 15px;
+    width: 15px;
+}

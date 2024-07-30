@@ -1,9 +1,10 @@
-import './style.css'
+import './style.css';
 import { Link } from 'react-router-dom';
+import { useCart } from '../../context/CartProvider';
 import CartWidget from '../CartWidget';
 
-
-function NavBar({ contador }) {
+function NavBar() {
+    const { acumuladorCartWidget } = useCart();
     
     return (
         <header className='navBar'>
@@ -21,7 +22,7 @@ function NavBar({ contador }) {
                         <li><button>Login</button></li>
                         <li><button>Cadastro</button></li>
                     </ul>
-                    <CartWidget contador={contador}/>
+                    <CartWidget acumulador={acumuladorCartWidget()} />
                 </div>
             </nav>
         </header>

@@ -5,8 +5,8 @@ import { useCart } from '../../context/CartProvider';
 import ItemCount from '../ItemCount';
 
 function ItemDetail({ item }) {
-    const [contador, setContador] = useState(1);
     const { cart, adicionarAoCarrinho } = useCart();
+    const [contador, setContador] = useState(1);
 
     const itemNoCarrinho = cart.find(cartItem => cartItem.id === item.id);
     const quantidadeNoCarrinho = itemNoCarrinho ? itemNoCarrinho.quantidade : 0;
@@ -42,6 +42,7 @@ function ItemDetail({ item }) {
             <ItemCount
                 estoque={item.estoque}
                 contadorInicial={1}
+                contexto='detalhe'
                 quantidadeNoCarrinho={quantidadeNoCarrinho}
                 atualizacaoContador={setContador}
             />

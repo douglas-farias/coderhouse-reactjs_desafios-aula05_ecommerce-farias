@@ -29,7 +29,7 @@ function ItemDetailContainer({ voltar }) {
                             imagemAlt: 'Descrição da imagem 1',
                             novidade: true,
                             oferta: false,
-                            precoOferta: 0.00,
+                            precoOferta: '',
                             estoque: 15,
                             quantidade: 0
                         },
@@ -47,7 +47,7 @@ function ItemDetailContainer({ voltar }) {
                             imagemAlt: 'Descrição da imagem 2',
                             novidade: true,
                             oferta: false,
-                            precoOferta: 0.00,
+                            precoOferta: '',
                             estoque: 20,
                             quantidade: 0
                         },
@@ -65,7 +65,7 @@ function ItemDetailContainer({ voltar }) {
                             imagemAlt: 'Descrição da imagem 3',
                             novidade: true,
                             oferta: false,
-                            precoOferta: 0.00,
+                            precoOferta: '',
                             estoque: 25,
                             quantidade: 0
                         },
@@ -83,7 +83,7 @@ function ItemDetailContainer({ voltar }) {
                             imagemAlt: 'Descrição da imagem 4',
                             novidade: true,
                             oferta: false,
-                            precoOferta: 0.00,
+                            precoOferta: '',
                             estoque: 30,
                             quantidade: 0
                         }
