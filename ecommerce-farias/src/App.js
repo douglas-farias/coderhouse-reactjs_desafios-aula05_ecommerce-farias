@@ -8,19 +8,18 @@ function App() {
 
   return (
 
-      <BrowserRouter>
+    <BrowserRouter>
 
-        <CartProvider>
+      <CartProvider>
 
-          <NavBar />
+        <NavBar />
 
-          <Router />
-          
-        </CartProvider>
+        <Router />
 
-      </BrowserRouter>
+      </CartProvider>
+      
+    </BrowserRouter>
   );
-  
 }
 
 export default App;

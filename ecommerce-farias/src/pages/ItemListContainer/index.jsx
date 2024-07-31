@@ -1,111 +1,31 @@
 import './style.css';
 import ItemList from '../../components/ItemList';
 import { useState, useEffect } from 'react';
+import db from '../../services/firebase';
+import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 
 function ItemListContainer() {
-
   const [itens, setItens] = useState([]);
-  const [carregamento, setCarregamento] = useState(true);
 
   useEffect(() => {
-    const obterProdutos = () => {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve([
-            { 
-              id: '0001',
-              categoria: 'Categoria A',
-              subcategoria: 'Categoria A1',
-              nome: 'Produto 01',
-              descricao: 'Maecenas ipsum velit, consectetuer eu, lobortis ut, dictum at, dui. In rutrum. Sed ac dolor sit amet purus malesuada congue. In laoreet, magna id viverra tincidunt, sem odio bibendum justo, vel imperdiet sapien wisi sed libero. Suspendisse sagittis ultrices augue. Mauris metus.',
-              detalhe1: 'Detalhe X',
-              detalhe2: 'Detalhe Y',
-              preco: 9.90,
-              imagem: '/produto01-1.png',
-              imagemAlt: 'Descrição da imagem 1',
-              novidade: true,
-              oferta: false,
-              precoOferta: '',
-              estoque: 15,
-              quantidade: 0
-            },
-            {
-              id: '0002',
-              categoria: 'Categoria A',
-              subcategoria: 'Categoria A1',
-              nome: 'Produto 02',
-              descricao: 'Maecenas ipsum velit, consectetuer eu, lobortis ut, dictum at, dui. In rutrum. Sed ac dolor sit amet purus malesuada congue. In laoreet, magna id viverra tincidunt, sem odio bibendum justo, vel imperdiet sapien wisi sed libero. Suspendisse sagittis ultrices augue. Mauris metus.',
-              detalhe1: 'XXX',
-              detalhe2: 'YYY',
-              detalhe3: 'ZZZ',
-              preco: 19.90,
-              imagem: '/produto01-1.png',
-              imagemAlt: 'Descrição da imagem 2',
-              novidade: true,
-              oferta: false,
-              precoOferta: '',
-              estoque: 20,
-              quantidade: 0
-            },
-            {
-              id: '0003',
-              categoria: 'Categoria A',
-              subcategoria: 'Categoria A1',
-              nome: 'Produto 03',
-              descricao: 'Maecenas ipsum velit, consectetuer eu, lobortis ut, dictum at, dui. In rutrum. Sed ac dolor sit amet purus malesuada congue. In laoreet, magna id viverra tincidunt, sem odio bibendum justo, vel imperdiet sapien wisi sed libero. Suspendisse sagittis ultrices augue. Mauris metus.',
-              detalhe1: 'XXX',
-              detalhe2: 'YYY',
-              detalhe3: 'ZZZ',
-              preco: 29.90,
-              imagem: '/produto01-1.png',
-              imagemAlt: 'Descrição da imagem 3',
-              novidade: true,
-              oferta: false,
-              precoOferta: '',
-              estoque: 25,
-              quantidade: 0
-            },
-            {
-              id: '0004',
-              categoria: 'Categoria A',
-              subcategoria: 'Categoria A1',
-              nome: 'Produto 04',
-              descricao: 'Maecenas ipsum velit, consectetuer eu, lobortis ut, dictum at, dui. In rutrum. Sed ac dolor sit amet purus malesuada congue. In laoreet, magna id viverra tincidunt, sem odio bibendum justo, vel imperdiet sapien wisi sed libero. Suspendisse sagittis ultrices augue. Mauris metus.',
-              detalhe1: 'XXX',
-              detalhe2: 'YYY',
-              detalhe3: 'ZZZ',
-              preco: 39.90,
-              imagem: '/produto01-1.png',
-              imagemAlt: 'Descrição da imagem 4',
-              novidade: true,
-              oferta: false,
-              precoOferta: '',
-              estoque: 30,
-              quantidade: 0
-            }
-          ]);
-        }, 2000);
-      });
-    };
-
-    obterProdutos().then(produtos => {
-      setItens(produtos);
-      setCarregamento(false);
-    });
+    obterProdutos();
   }, []);
+
+  const obterProdutos = async () => {
+    try {
+      const produtosCollection = collection(db, "ItemCollection");
+      const produtosQuery = query(produtosCollection, orderBy("nome"));
+      const snapshot = await getDocs(produtosQuery);
+      const produtos = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+      setItens(produtos);
+    } catch (error) {
+      console.error("Erro ao obter produtos: ", error);
+    }
+  };
 
   return (
     <div className='itemListContainer'>
-      {carregamento ? (
-        <div className='carregamento'>
-          <img src='/transparente_logo.png' alt='Logo Ecommerce' />
-          <h2>Carregando a lista de produtos...</h2>
-        </div>
-      ) : (
-        <ItemList
-          itens={itens}
-        />
-      )}
+      <ItemList itens={itens} />
     </div>
   );
 }

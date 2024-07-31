@@ -4,6 +4,7 @@ import { useCart } from '../../context/CartProvider';
 import CartWidget from '../CartWidget';
 
 function NavBar() {
+    
     const { acumuladorCartWidget } = useCart();
     
     return (
@@ -13,7 +14,11 @@ function NavBar() {
                     <Link to={'/'}>E_COMMERCE</Link>
                 </div>
                 <ul>
-                    <li><a>Produtos</a></li>
+                    <li>
+                        <Link to='/produtos'>
+                            Produtos
+                        </Link>
+                    </li>
                     <li><a>Novidades</a></li>
                     <li><a>Ofertas</a></li>
                 </ul>

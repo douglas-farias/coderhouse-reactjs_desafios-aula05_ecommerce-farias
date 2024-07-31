@@ -1,23 +1,20 @@
 import './style.css';
-import Item from '../Item';
+import ItemCard from '../ItemCard';
 
-function ItemList({ itens, adicionar, subtrair }) {
-
-    return (
-        <div>
-            <h1 className='itemLista__titulo'>PRODUTOS</h1>
-            <div className='itemList'>
-                {itens.map(item => (
-                    <Item
-                        key={item.id}
-                        item={item}
-                        adicionar={adicionar}
-                        subtrair={subtrair}
-                    />
-                ))}
-            </div>
-        </div>
-    );
+function ItemList({ itens }) {
+  return (
+    <div>
+      <h1 className='itemLista__titulo'>PRODUTOS</h1>
+      <div className='itemList'>
+        {itens.map(item => (
+            <ItemCard
+                key={item.id}
+                item={item}
+            />
+        ))}
+      </div>
+    </div>
+  );
 }
 
 export default ItemList;
