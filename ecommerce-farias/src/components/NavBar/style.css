@@ -47,6 +47,10 @@ header {
   margin-left: 20px;
 }
 
+.navBarLista__central {
+  display: flex;
+}
+
 .navBar nav button {
   background-color: #FFFFFF00;
   cursor: pointer;
@@ -87,4 +91,9 @@ header {
 
 .auth-cart button:hover {
   font-weight: bold;
+}
+
+.navBar__voltar h5{
+  font-weight: 300;
+  font-size: 12pt;
 }

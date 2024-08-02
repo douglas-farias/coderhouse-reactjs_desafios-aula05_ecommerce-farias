@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import ItemSlider from '../../components/ItemSlider';
 import ItemList from '../../components/ItemList';
 import CategoryList from '../../components/CategoryList';
+import { CLASS_TOGGLE } from '@splidejs/splide';
 
 function Main() {
 

@@ -13,6 +13,14 @@ export default function CartProvider({ children }) {
     return cart.reduce((acc, item) => acc + item.quantidade, 0);
   }
 
+  function atualizarQuantidade(id, quantidade) {
+    setCart(prevCart =>
+      prevCart.map(item =>
+        item.id === id ? { ...item, quantidade } : item
+      )
+    );
+  }
+
   function isInCart(id) {
     return cart.some(item => item.id === id);
   }
@@ -40,13 +48,9 @@ export default function CartProvider({ children }) {
     setCart([]);
   }
 
-  function atualizarQuantidade(id, quantidade) {
-    setCart(prevCart =>
-      prevCart.map(item =>
-        item.id === id ? { ...item, quantidade } : item
-      )
-    );
-  }
+  // function finalizarCompra() {
+
+  // }
 
   return (
     <CartContext.Provider value={{ cart, acumuladorCartWidget, isInCart, adicionarAoCarrinho, removerDoCarrinho, limparCarrinho, totalCarrinho, atualizarQuantidade }}>

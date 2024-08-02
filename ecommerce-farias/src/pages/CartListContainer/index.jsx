@@ -1,11 +1,100 @@
 import './style.css';
 import { useState } from 'react';
-import CartList from '../../components/CartList';
 import { useCart } from '../../context/CartProvider';
+import { format } from "date-fns";
+import db from '../../services/firebase';
+import { addDoc, collection } from 'firebase/firestore';
+import { ToastContainer, toast, Bounce } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; // Import toastify CSS
+import CartList from '../../components/CartList';
+import FinalModal from '../../components/FinalModal';
+import { useNavigate } from 'react-router-dom';
 
 function CartListContainer() {
     const { cart, totalCarrinho, limparCarrinho } = useCart();
+    const [modalEstaAberto0, setModalEstaAberto0] = useState(false);
     const [desconto, setDesconto] = useState(0);
+    const navigate = useNavigate();
+
+    const abrirFecharModal0 = () => {
+        setModalEstaAberto0(prevState => !prevState);
+        if (!modalEstaAberto0) {
+            navigate('/');
+        }
+    };
+
+    const usuarioTemporario = {
+        nome: 'Klayton Júnior',
+        tel: '00 00000-00000',
+        email: 'klayton@email.com'
+    };
+
+    const enviarPedido = async () => {
+        abrirFecharModal0();
+        const currentDate = format(new Date(), 'dd.MM.yyyy');
+
+        const itens = JSON.parse(localStorage.getItem('cart'));
+        const itensFiltrados = itens.map(item => ({
+            id: item.id,
+            nome: item.nome,
+            quantidade: item.quantidade,
+            subtotal: (item.preco * item.quantidade)
+        }));
+
+        const totalCompra = (cart.length !== 0 ? (totalCarrinho() - desconto + 10) : 0).toFixed(2).replace('.', ',');
+
+        const pedidoFinalizado = {
+            data: currentDate,
+            cliente: usuarioTemporario,
+            compra: itensFiltrados,
+            valores: {
+                subtotal: totalCarrinho(),
+                frete: 10.toFixed(2),
+                desconto: desconto.toFixed(2),
+                total: totalCompra
+            }
+        };
+
+        try {
+            await addDoc(collection(db, 'Orders'), pedidoFinalizado);
+            console.log(pedidoFinalizado)
+            toast.info(
+                'Aguardando Pagamento', {
+                    position: "top-center",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    transition: Bounce,
+                    onClose: () => {
+                        toast.success(
+                            'Compra Finalizada com sucesso!', {
+                                position: "top-center",
+                                autoClose: 2000,
+                                hideProgressBar: false,
+                                closeOnClick: true,
+                                pauseOnHover: true,
+                                draggable: true,
+                                progress: undefined,
+                                theme: "light",
+                                transition: Bounce,
+                                onClose: () => {
+                                    abrirFecharModal0();
+                                    limparCarrinho();
+                                }
+                            }
+                        );
+                    }
+                }
+            );
+        } catch (error) {
+            console.error("Erro ao enviar pedido: ", error);
+            toast.error('Erro ao enviar pedido.');
+        }
+    }
 
     const listaCupons = [
         { codigo: "CUPOM10", valor: 0.1 },
@@ -27,12 +116,13 @@ function CartListContainer() {
 
     function cupomKeyDown(event) {
         if (event.key === 'Enter') {
-            calcularDesconto()
+            calcularDesconto();
         }
     }
-    
+
     return (
         <div className='cartListContainer'>
+            <ToastContainer />
             <div className='cartListContainer__titulo'>
                 <h1>CARRINHO</h1>
             </div>
@@ -86,7 +176,7 @@ function CartListContainer() {
                         </tr>
                         <tr id="freteExpresso">
                             <td><input type="radio" name="opcaoFrete" value="10" /></td>
-                            <td>EXPRESSO</td>   
+                            <td>EXPRESSO</td>
                             <td>3 a 5 dias</td>
                             <td>R$ 10,00</td>
                         </tr>
@@ -116,10 +206,15 @@ function CartListContainer() {
                     </div>
                     <div className='cartListContainer__resumoBotoes'>
                         <button onClick={() => limparCarrinho(cart)} disabled={(cart.length === 0)}>LIMPAR</button>
-                        <button disabled={(cart.length === 0)}>FINALIZAR</button>
+                        <button onClick={enviarPedido} disabled={(cart.length === 0)}>FINALIZAR</button>
                     </div>
                 </div>
             </div>
+            {modalEstaAberto0 && <FinalModal
+                                    abrirFecharModal0={abrirFecharModal0}
+                                    modalEstaAberto0={modalEstaAberto0}
+                                />
+            }
         </div>
     );
 }

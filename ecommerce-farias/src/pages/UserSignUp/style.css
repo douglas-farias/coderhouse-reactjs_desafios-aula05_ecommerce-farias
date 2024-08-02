@@ -1,0 +1,247 @@
+form {
+    display: grid;
+    gap: 18px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+}
+
+input {
+    display: inline-block;
+    padding-left: 6px;
+    width: 300px;
+    height: 36px;
+    border: 0;
+    outline: 0;
+    font-family: "Roboto", sans-serif;
+    font-weight: 200;
+    font-style: normal;
+    font-size: 12pt;
+    margin-bottom: 12px;
+}
+
+input:last-child {
+    margin-bottom: 0;
+}
+
+input:valid {
+    font-weight: 400;
+}
+
+input::placeholder {
+    font-weight: 200;
+}
+
+input:is(:-webkit-autofill, :autofill) {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 12pt;
+    margin-bottom: 12px;
+}
+
+section {
+    flex: 1;
+}
+
+.error-message {
+    color: #C61E2B;
+    font-size: 0.875em;
+  }
+
+.input-error {
+    border: 2px solid #C61E2B;
+    border-radius: 6px;
+  }  
+
+.userSignUp {
+    font-family: "Roboto", sans-serif;
+    display: grid;
+    column-gap: 60px;
+    row-gap: 24px;
+    grid-template-areas:
+    "titulo"
+    "formulario";
+    flex: 1;
+    padding: 24px 60px;
+}
+
+.conteudo__titulo {
+    color: #000000;
+    grid-area: titulo;
+    font-size: 32px;
+}
+
+.conteudo__formulario {
+    grid-area: formulario;
+    height: 100%;
+}
+
+.conteudo__formulario input {
+    width: 100%;
+}
+
+.conteudo__formulario input:focus {
+    font-weight: 400;
+    border-bottom: 2px solid #4563BF;
+}
+
+.conteudo__formulario div {
+    padding: 24px;
+    border-radius: 24px;
+}
+
+.conteudo__formulario div:last-child{
+    padding: 0;
+    border-radius: 24px;
+}
+
+.formulario__dadosPessoais {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    display: flex;
+    flex-direction: column;
+    background-color: #F2F2F2;
+}
+
+.formulario__dadosPessoais input {
+    background-color: #F2F2F2;
+    border-bottom: 1px solid #4563BF;
+    color: #4563BF;
+}
+
+.formulario__dadosPessoais input::placeholder {
+    color: #2135A6;;
+}
+
+.formulario__dadosPessoais input:is(:-webkit-autofill, :autofill) {
+    background-color: #F2F2F2;
+    border: 1pt solid #4563BF;
+    border-radius: 6px;
+}
+
+.formulario__dadosAcesso {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+    display: flex;
+    flex-direction: column;
+    background-color: #ADC0D9;
+}
+
+.formulario__dadosAcesso div {
+    display: flex;
+    flex-direction: column;
+}
+
+.formulario__dadosAcesso input {
+    background-color: #ADC0D9;
+    border-bottom: 1px solid #4563BF;
+    color: #4563BF;
+}
+
+.formulario__dadosAcesso input::placeholder {
+    color: #2135A6;;
+}
+
+.formulario__dadosAcesso input:is(:-webkit-autofill, :autofill) {
+    background-color: #ADC0D9;
+    border: 1pt solid #4563BF;
+    border-radius: 6px;
+}
+
+#formulario__alertaSenhaRepetir {
+    margin: -10px 0 10px 0;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 9pt;
+}
+
+#formulario__alertaEmailRepetido {
+    margin: -10px 0 10px 0;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 9pt;
+}
+
+.formulario__dadosLocalizacao {
+    grid-column: 2 / 3;
+    grid-row: 1 / 3;
+    display: flex;
+    flex-direction: column;
+    background-color: #7999D9;
+    align-self: stretch;
+    color: #FFFFFF; 
+}
+
+.formulario__dadosLocalizacao input {
+    border-bottom: 1px solid #FFFFFF;
+    background-color: #7999D9;
+    color: #FFFFFF; 
+}
+
+.formulario__dadosLocalizacao input:focus {
+    border-bottom: 2px solid #FFFFFF;
+}
+
+.formulario__dadosLocalizacao input::placeholder {
+    color: #FFFFFF;
+}
+
+.formulario__dadosLocalizacao input:is(:-webkit-autofill, :autofill) {
+    background-color: #7999D9;
+    border: 1pt solid #FFFFFF;
+    border-radius: 6px;
+}
+
+.dadosLocalizacao__cidadeUf {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 19px 36px;
+}
+
+.formulario__dadosLocalizacao #cidade span {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;    
+}
+
+.formulario__dadosLocalizacao #cidade {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;   
+}
+
+.formulario__dadosLocalizacao #Uf span {
+    grid-column: 2 / 3;
+    grid-row: 1/ 2;    
+}
+
+.formulario__dadosLocalizacao #Uf {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;    
+}
+
+#formulario__botaoCadastrar {
+    grid-column: 1 / 3;
+    grid-row: 3 / 4;
+    background-color: #4563BF;
+    padding: 5px 0;
+    width: 100%;
+    height: 48px;
+    border-radius: 12px;
+    align-items: center;
+    color: #FFFFFF;
+    font-family: "Roboto", sans-serif;
+    font-weight: 100;
+    font-style: normal;
+    font-size: 12pt;
+    border: none;
+    cursor: pointer;
+}
+
+#formulario__botaoCadastrar button:hover {
+    background-color: #2135A6;
+}
+
+#formulario__botaoCadastrar button:disabled {
+    cursor: not-allowed;
+}
