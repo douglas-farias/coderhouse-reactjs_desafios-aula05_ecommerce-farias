@@ -81,6 +81,7 @@ export default function CartProvider({ children }) {
   function limparCarrinho() {
     if (!verificarLogin()) return;
     setCart([]);
+    atualizarCarrinhoNoFirebase();
   }
 
   const atualizarCarrinhoNoFirebase = async () => {    

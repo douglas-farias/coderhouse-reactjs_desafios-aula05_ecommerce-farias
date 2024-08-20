@@ -12,13 +12,18 @@ import CartList from '../../components/CartList';
 import FinalModal from '../../components/FinalModal';
 
 function CartListContainer() {
-    const { cart, totalCarrinho, limparCarrinho, atualizarCarrinhoNoFirebase } = useCart();
-    const [modalEstaAberto0, setModalEstaAberto0] = useState(false);
+    const { cart, totalCarrinho, limparCarrinho } = useCart();
     const [desconto, setDesconto] = useState(0);
-    // const [distancia, setDistancia] = useState(null);
+    const [inputFrete, setInputFrete] = useState(null);
 
     const navigate = useNavigate();
     const usuarioLogado = JSON.parse(localStorage.getItem('loggedInUser'));
+
+    const handleFreteChange = (event) => {
+        setInputFrete(event.target.value);
+    };
+
+    // const [distancia, setDistancia] = useState(null);
 
     // const enderecoOrigem = '-23.5492,-46.6331';
     // const enderecoDestinoCompleto = `${usuarioLogado.endereco.logradouro}, ${usuarioLogado.endereco.numero} - ${usuarioLogado.endereco.bairro} - ${usuarioLogado.endereco.cidade}, ${usuarioLogado.endereco.uf}`;
@@ -89,7 +94,6 @@ function CartListContainer() {
     // calcularDistancia()
 
     const enviarPedido = async () => {
-        // abrirFecharModal0();
         const currentDateTime = format(new Date(), 'dd.MM.yyyy - HH:mm:ss');
 
         const itens = usuarioLogado.carrinho;
@@ -100,7 +104,7 @@ function CartListContainer() {
             subtotal: (item.preco * item.quantidade)
         }));
 
-        const totalCompra = (cart.length !== 0 ? (totalCarrinho() - desconto + 10) : 0).toFixed(2);
+        const totalCompra = (cart.length !== 0 ? (totalCarrinho() - desconto + parseFloat(inputFrete || 10)) : 0).toFixed(2);
 
         const pedidoFinalizado = {
             data: currentDateTime,
@@ -112,12 +116,12 @@ function CartListContainer() {
             compra: itensFiltrados,
             entrega: {
                 endereco: usuarioLogado.endereco,
-                tipo: 'Padrão',
-                prazo: '10 a 15 dias'
+                tipo: inputFrete === "10" ? 'Expresso' : 'Padrão',
+                prazo: inputFrete === "10" ? '3 a 5 dias' : '10 a 15 dias'
             },
             valores: {
                 subtotal: totalCarrinho(),
-                frete: (10).toFixed(2),
+                frete: parseFloat(inputFrete || 10).toFixed(2),
                 desconto: desconto.toFixed(2),
                 total: totalCompra
             }
@@ -150,7 +154,6 @@ function CartListContainer() {
                                 theme: "light",
                                 transition: Bounce,
                                 onClose: () => {
-                                    abrirFecharModal0();
                                     limparCarrinho();
                                 }
                             }
@@ -240,13 +243,13 @@ function CartListContainer() {
                         </thead>
                         <tbody>
                             <tr id="fretePadrao">
-                                <td><input type="radio" name="opcaoFrete" value="5" /></td>
+                                <td><input type="radio" name="opcaoFrete" value={Number('5')} onChange={handleFreteChange} /></td>
                                 <td>PADRÃO</td>
                                 <td>10 a 15 dias</td>
                                 <td>R$ 5,00</td>
                             </tr>
                             <tr id="freteExpresso">
-                                <td><input type="radio" name="opcaoFrete" value="10" /></td>
+                                <td><input type="radio" name="opcaoFrete" value={Number('10')} onChange={handleFreteChange} /></td>
                                 <td>EXPRESSO</td>
                                 <td>3 a 5 dias</td>
                                 <td>R$ 10,00</td>
@@ -269,11 +272,11 @@ function CartListContainer() {
                         </div>
                         <div>
                             <p>frete</p>
-                            <span>R$ 10,00</span>
+                            <span>R$ {(parseFloat(inputFrete) || 0).toFixed(2).replace('.', ',')}</span>
                         </div>
                         <div>
                             <p>TOTAL</p>
-                            <span>R$ {(cart.length !== 0 ? (totalCarrinho() - desconto + 10) : 0).toFixed(2).replace('.', ',')}</span>
+                            <span>R$ {(cart.length !== 0 ? (totalCarrinho() - desconto + parseFloat(inputFrete || 10)) : 0).toFixed(2).replace('.', ',')}</span>
                         </div>
                     </div>
                     <div className='cartListContainer__resumoBotoes'>
@@ -282,11 +285,6 @@ function CartListContainer() {
                     </div>
                 </div>
             </div>
-            {modalEstaAberto0 && <FinalModal
-                                    abrirFecharModal0={abrirFecharModal0}
-                                    modalEstaAberto0={modalEstaAberto0}
-                                />
-            }
         </div>
     );
 }
