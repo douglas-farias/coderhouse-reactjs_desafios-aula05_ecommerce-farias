@@ -1,39 +1,98 @@
 import './style.css';
-import { useState } from 'react';
+import 'react-toastify/dist/ReactToastify.css';
+import { useState, useEffect } from 'react';
 import { useCart } from '../../context/CartProvider';
 import { format } from "date-fns";
-import db from '../../services/firebase';
 import { addDoc, collection } from 'firebase/firestore';
 import { ToastContainer, toast, Bounce } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; // Import toastify CSS
+import { useNavigate } from 'react-router-dom';
+// import axios from 'axios';
+import db from '../../services/firebase';
 import CartList from '../../components/CartList';
 import FinalModal from '../../components/FinalModal';
-import { useNavigate } from 'react-router-dom';
 
 function CartListContainer() {
-    const { cart, totalCarrinho, limparCarrinho } = useCart();
+    const { cart, totalCarrinho, limparCarrinho, atualizarCarrinhoNoFirebase } = useCart();
     const [modalEstaAberto0, setModalEstaAberto0] = useState(false);
     const [desconto, setDesconto] = useState(0);
+    // const [distancia, setDistancia] = useState(null);
+
     const navigate = useNavigate();
+    const usuarioLogado = JSON.parse(localStorage.getItem('loggedInUser'));
 
-    const abrirFecharModal0 = () => {
-        setModalEstaAberto0(prevState => !prevState);
-        if (!modalEstaAberto0) {
-            navigate('/');
-        }
-    };
+    // const enderecoOrigem = '-23.5492,-46.6331';
+    // const enderecoDestinoCompleto = `${usuarioLogado.endereco.logradouro}, ${usuarioLogado.endereco.numero} - ${usuarioLogado.endereco.bairro} - ${usuarioLogado.endereco.cidade}, ${usuarioLogado.endereco.uf}`;
 
-    const usuarioTemporario = {
-        nome: 'Klayton Júnior',
-        tel: '00 00000-00000',
-        email: 'klayton@email.com'
-    };
+    // useEffect(() => {
+    //     const loadGoogleMaps = () => {
+    //         const script = document.createElement('script');
+    //         script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyCTfmS9NX4L8tw-XLGlwDibbtMqNiRQTPY&libraries=places`;
+    //         script.async = true;
+    //         script.onload = () => handleCalculateDistance();
+    //         document.head.appendChild(script);
+    //     };
+
+    //     const handleCalculateDistance = () => {
+    //         const service = new google.maps.DistanceMatrixService();
+    //         service.getDistanceMatrix({
+    //             origins: [enderecoOrigem],
+    //             destinations: [enderecoDestinoCompleto],
+    //             travelMode: google.maps.TravelMode.DRIVING,
+    //             unitSystem: google.maps.UnitSystem.METRIC,
+    //             avoidHighways: false,
+    //             avoidTolls: false
+    //         }, callback);
+    //     };
+
+    //     loadGoogleMaps();
+    // }, [enderecoOrigem, enderecoDestinoCompleto]);
+
+    // function callback(response, status) {
+    //     if (status === 'OK') {
+    //         const origin = response.originAddresses[0];
+    //         const destination = response.destinationAddresses[0];
+    //         const element = response.rows[0].elements[0];
+    //         const distance = element.distance.text;
+    //         const duration = element.duration.text;
+
+    //         console.log(`De: ${origin}`);
+    //         console.log(`Para: ${destination}`);
+    //         console.log(`Distância: ${distance}`);
+    //         console.log(`Duração: ${duration}`);
+
+    //         setDistancia(distance);
+    //     } else {
+    //         console.error(`Erro: ${status}`);
+    //     }
+    // }
+
+    // const enderecoDestinoFormatado = encodeURI(enderecoDestinoCompleto);
+    // const calcularDistancia = async () => {
+    //     const apiKey = 'AIzaSyCTfmS9NX4L8tw-XLGlwDibbtMqNiRQTPY';
+    //     const origem = '-23.5492,-46.6331';
+    //     const destino = enderecoDestinoFormatado;
+    
+    //     const url = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${origem}&destinations=${destino}&key=${apiKey}`;
+    
+    //     try {
+    //         const response = await axios.get(url);
+    //         const resultado = response.data;
+    //         const distanciaEmMetros = resultado.rows[0].elements[0].distance.value;
+    //         localStorage.setItem('distancia', JSON.stringify(resultado))
+    //         setDistancia(distanciaEmMetros);
+    //         console.log(distanciaEmMetros);
+    //     } catch (error) {
+    //         console.error('Erro ao buscar dados: ', error);
+    //     }
+    // };
+
+    // calcularDistancia()
 
     const enviarPedido = async () => {
-        abrirFecharModal0();
-        const currentDate = format(new Date(), 'dd.MM.yyyy');
+        // abrirFecharModal0();
+        const currentDateTime = format(new Date(), 'dd.MM.yyyy - HH:mm:ss');
 
-        const itens = JSON.parse(localStorage.getItem('cart'));
+        const itens = usuarioLogado.carrinho;
         const itensFiltrados = itens.map(item => ({
             id: item.id,
             nome: item.nome,
@@ -41,15 +100,24 @@ function CartListContainer() {
             subtotal: (item.preco * item.quantidade)
         }));
 
-        const totalCompra = (cart.length !== 0 ? (totalCarrinho() - desconto + 10) : 0).toFixed(2).replace('.', ',');
+        const totalCompra = (cart.length !== 0 ? (totalCarrinho() - desconto + 10) : 0).toFixed(2);
 
         const pedidoFinalizado = {
-            data: currentDate,
-            cliente: usuarioTemporario,
+            data: currentDateTime,
+            cliente: {
+                id: usuarioLogado.id,
+                nome: `${usuarioLogado.nome} ${usuarioLogado.sobrenome}`,
+                email: usuarioLogado.email,
+            },
             compra: itensFiltrados,
+            entrega: {
+                endereco: usuarioLogado.endereco,
+                tipo: 'Padrão',
+                prazo: '10 a 15 dias'
+            },
             valores: {
                 subtotal: totalCarrinho(),
-                frete: 10.toFixed(2),
+                frete: (10).toFixed(2),
                 desconto: desconto.toFixed(2),
                 total: totalCompra
             }
@@ -59,7 +127,7 @@ function CartListContainer() {
             await addDoc(collection(db, 'Orders'), pedidoFinalizado);
             console.log(pedidoFinalizado)
             toast.info(
-                'Aguardando Pagamento', {
+                'Processando pagamento', {
                     position: "top-center",
                     autoClose: 2000,
                     hideProgressBar: false,
@@ -144,42 +212,46 @@ function CartListContainer() {
                     <h4>ENTREGA</h4>
                     <div>
                         <p>ENDEREÇO&nbsp;&nbsp;</p>
-                        <span>-</span>
+                        <span>{ `${usuarioLogado.endereco.logradouro}, ${usuarioLogado.endereco.numero}` }</span>
                     </div>
                     <div>
                         <p>COMPLEMENTO&nbsp;&nbsp;</p>
-                        <span>-</span>
+                        <span>{usuarioLogado.endereco.complemento}</span>
                     </div>
                     <div>
                         <p>CEP&nbsp;&nbsp;</p>
-                        <span>-</span>
+                        <span>{usuarioLogado.endereco.cep}</span>
                     </div>
                     <div>
                         <p>CIDADE&nbsp;&nbsp;</p>
-                        <span>-</span>
+                        <span>{`${usuarioLogado.endereco.cidade}, ${usuarioLogado.endereco.uf}`}</span>
                     </div>
                 </div>
                 <div className='cartListContainer__entregaFrete'>
                     <h4>FRETE</h4>
                     <table className="cartListContainer__freteTabela">
-                        <tr>
-                            <th>_</th>
-                            <th>ENVIO</th>
-                            <th>PRAZO</th>
-                            <th>PREÇO</th>
-                        </tr>
-                        <tr id="fretePadrao">
-                            <td><input type="radio" name="opcaoFrete" value="5" /></td>
-                            <td>PADRÃO</td>
-                            <td>10 a 15 dias</td>
-                            <td>R$ 5,00</td>
-                        </tr>
-                        <tr id="freteExpresso">
-                            <td><input type="radio" name="opcaoFrete" value="10" /></td>
-                            <td>EXPRESSO</td>
-                            <td>3 a 5 dias</td>
-                            <td>R$ 10,00</td>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>_</th>
+                                <th>ENVIO</th>
+                                <th>PRAZO</th>
+                                <th>PREÇO</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr id="fretePadrao">
+                                <td><input type="radio" name="opcaoFrete" value="5" /></td>
+                                <td>PADRÃO</td>
+                                <td>10 a 15 dias</td>
+                                <td>R$ 5,00</td>
+                            </tr>
+                            <tr id="freteExpresso">
+                                <td><input type="radio" name="opcaoFrete" value="10" /></td>
+                                <td>EXPRESSO</td>
+                                <td>3 a 5 dias</td>
+                                <td>R$ 10,00</td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
             </div>

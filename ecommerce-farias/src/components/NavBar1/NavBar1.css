@@ -1,0 +1,75 @@
+header{
+    background-color: #F2F2F2;
+}
+
+.navBarContainer {
+    display: grid;
+    grid-template-rows:repeat(2 1fr);
+    grid-template-areas:
+    "navBar"
+    "dropdown-menu";
+}
+
+.navBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 24px 60px;
+    grid-area: navBar;
+}
+
+.navBar div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.navBar a, .navBar button {
+    cursor: pointer;
+    color: #000000;
+}
+
+.navBar img {
+    width: 24px;
+    height: 24px;
+}
+
+.navBar input {
+    height: 24px;
+    margin-bottom: 0;
+    padding-left: 0;
+}
+
+.categoryCard {
+    width: 100%;
+    padding: 24px 60px;
+    grid-area: dropdown-menu;
+}
+
+.navBar__home {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.navBar__conteudo {
+    gap: 36px;
+}
+
+.navBar__busca input {
+    flex-grow: 1;
+    width: 500px;
+    height: 24px;
+    border: 0;
+    outline: 0;
+    font-family: "Roboto", sans-serif;
+    font-weight: 200;
+    font-style: normal;
+    font-size: 12pt;
+    background-color: #F2F2F2;
+    border-bottom: 1px solid #4563BF;
+    color: #4563BF;
+}
+
+.navBar__usuario {
+    gap:24px
+}

@@ -97,3 +97,38 @@ header {
   font-weight: 300;
   font-size: 12pt;
 }
+
+/* ---------------------------------------------------------------- */
+
+.navBar nav .navBar__busca div {
+  width: 200px;
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+}
+
+.navBar__busca input {
+    margin: 0 0 0 20px;
+    padding-left: 0;
+    flex-grow: 1;
+    height: 24px;
+    border: 0;
+    outline: 0;
+    font-family: "Roboto", sans-serif;
+    font-weight: 200;
+    font-style: normal;
+    font-size: 12pt;
+    background-color: #F2F2F2;
+    border-bottom: 1px solid #4563BF;
+    color: #4563BF;
+}
+
+.menu__busca input:focus {
+    font-weight: 400;
+    border-bottom: 2px solid #4563BF;
+}
+
+header nav img {
+    width: 24px;
+    height: 24px;
+}

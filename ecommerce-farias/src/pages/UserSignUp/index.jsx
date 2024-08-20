@@ -4,11 +4,12 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import db from '../../services/firebase';
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, getDoc } from 'firebase/firestore';
 import { ToastContainer, toast } from 'react-toastify';
 import Input from '../../components/Input';
 
 function UserSignUp() {
+
   const { register, handleSubmit, watch, formState: { errors, isValid } } = useForm({ mode: 'onChange' });
   const [erroSenhas, setErroSenhas] = useState('');
   const [senhasIguais, setSenhasIguais] = useState(false);
@@ -47,15 +48,13 @@ function UserSignUp() {
           uf: data.uf,
         },
         carrinho: [],
-        login: true,
+        login: false,
       };
-
-      localStorage.setItem('loggedInUser', JSON.stringify(novoUsuario));
 
       try {
         await addDoc(collection(db, 'RegisteredUsers'), novoUsuario);
-        toast.success('Cadastrado com sucesso! Boas compras!', {
-          onClose: () => navigate(-1)
+        toast.success('Cadastrado com sucesso! Faça o login e boas compras!', {
+          onClose: () => navigate(-1, { state: { abrirModalLogin: true } })
         });
       } catch (error) {
         console.error("Erro ao cadastrar usuário: ", error);

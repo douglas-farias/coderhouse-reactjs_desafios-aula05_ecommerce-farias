@@ -8,13 +8,14 @@ import UserSignUp from '../pages/UserSignUp';
 function Router() {
   return (
     <Routes>
-      <Route path="/" element={<Main />} />
-      <Route path="/produtos" element={<ItemListContainer />} />
-      <Route path="/produto/:id" element={<ItemDetailContainer />} />
-      <Route path='/carrinho' element={<CartListContainer />} />
+      <Route path='/' element={<Main />} />
       <Route path='/cadastrousuario' element={<UserSignUp />} />
+      <Route path='/produtos' element={<ItemListContainer />} />
+      <Route path='/produtos/:filter' element={<ItemListContainer />} />
+      <Route path='/produto/:id' element={<ItemDetailContainer />} />
+      <Route path='/carrinho' element={<CartListContainer />} />
     </Routes>
   );
 }
 
-export default Router
+export default Router;

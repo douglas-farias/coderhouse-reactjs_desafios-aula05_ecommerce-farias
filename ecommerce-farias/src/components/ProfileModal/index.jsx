@@ -1,8 +1,15 @@
 import './sytle.css';
 
-function ProfileModal() {
+function ProfileModal({ menu }) {
+
+    function logout() {
+        
+    }
     return (
-        <div className='profileModal'>PERFIL</div>
+        <div className='profileModal' style={{ display: menu ? 'flex' : 'none'}}>
+            {/* <p className="editarPerfil">editar</p> */}
+            <p className="sairPerfil" onClick={() => {}}>sair do perfil</p>
+        </div>
     );
 }
 

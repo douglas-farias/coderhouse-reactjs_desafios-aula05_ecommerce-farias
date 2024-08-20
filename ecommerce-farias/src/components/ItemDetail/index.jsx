@@ -5,7 +5,7 @@ import { useCart } from '../../context/CartProvider';
 import ItemCount from '../ItemCount';
 
 function ItemDetail({ item }) {
-  const usuarioLogado = JSON.parse(localStorage.getItem('loggedInUser'));
+
   const { cart, adicionarAoCarrinho } = useCart();
   const [contador, setContador] = useState(1);
 
@@ -45,7 +45,6 @@ function ItemDetail({ item }) {
           <h4>{item.detalhe3}</h4>
         </div>
       </div>
-      {/* {usuarioLogado ? ( */}
         <>
           <ItemCount
             estoque={item.estoque}
@@ -63,16 +62,6 @@ function ItemDetail({ item }) {
             <button onClick={() => adicionarAoCarrinho({ ...item, quantidade: contador })}>Adicionar ao carrinho</button>
           </div>
         </>
-      {/* ) : (
-        <>
-          <div className='item__descricaoContainer'>
-            <h4>{item.categoria} &gt; {item.subcategoria}</h4>
-            <p>{item.descricao}</p>
-            <h2>R$ {item.preco.toFixed(2).replace('.', ',')}</h2>
-          </div>
-          <button className='botaoLoginItemDetail full-width full-heigth'>Fazer login para continuar suas compras</button>
-        </>
-      )} */}
     </div>
   );
 }

@@ -12,11 +12,12 @@
 .CartWidget img.icone {
     width: 24px;
     height: 24px;
-    margin-right: 8px;
+    margin-right: 6px;
 }
 
 .CartWidget h3 {
     margin: 0;
     font-family: "Roboto", sans-serif;
-    font-size: 12pt;
+    font-size: 13pt;
+    font-weight: 500;
 }
