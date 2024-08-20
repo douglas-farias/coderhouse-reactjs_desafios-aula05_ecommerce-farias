@@ -1,18 +1,27 @@
 import './NavBar.css';
+import 'react-toastify/dist/ReactToastify.css';
 import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast, Bounce } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { useCart } from '../../context/CartProvider';
 import CartWidget from '../CartWidget';
 import LoginModal from '../LoginModal';
-
 
 function NavBar() {
     
     const usuarioLogado = JSON.parse(localStorage.getItem('loggedInUser'));
     const { acumuladorCartWidget, atualizarCarrinhoNoFirebase } = useCart();
-    const [modalEstaAberto, setModalEstaAberto] = useState(false); 
+    const [modalEstaAberto, setModalEstaAberto] = useState(false);
+    const [busca, setBusca] = useState('');
+
+    const handleSearch = (event) => {
+        setBusca(event.target.value);
+    };
+
+    const buscarProdutos = () => {
+        navigate(`/produtos?busca=${busca}`);
+    }
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -72,8 +81,8 @@ function NavBar() {
                 ) : (
                     <>
                         <div className='navBar__busca'>
-                            <input type='text' id='buscaProdutos' placeholder='Busque os produtos' />
-                            <button id='botaoBuscar'><img src='/assets/2135A6-light_busca.svg' /></button>
+                            <input type='text' id='buscaProdutos' placeholder='Busque os produtos'  onChange={handleSearch}/>
+                            <button id='botaoBuscar' onClick={buscarProdutos}><img src='/assets/2135A6-light_busca.svg' /></button>
                         </div>
                         {usuarioLogado ? (
                             <div className='auth-cart'>

@@ -1,3 +1,15 @@
 .itemListContainer{
     padding: 24px 60px;
 }
+
+.itemLista__titulo {
+    margin-bottom: 24px;
+}
+
+.itemLista__mensagem {
+    display: inline;
+    font-family: "Roboto", sans-serif;
+    font-weight: 200;
+    font-style: normal;
+    font-size: 24pt;
+}
